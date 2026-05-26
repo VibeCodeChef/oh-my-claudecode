@@ -419,7 +419,7 @@ export function checkWorkerWorktreeRemovalSafety(teamName, workerName, repoRoot,
         return;
     validateWorktreeRemovalTarget({
         candidatePath: wtPath,
-        expectedRoots: [join(repoRoot, '.omc', 'team', sanitizeName(teamName), 'worktrees')],
+        expectedRoots: [join(getOmcRoot(repoRoot), 'team', sanitizeName(teamName), 'worktrees')],
         mainRepoRoots: [repoRoot],
     });
     let ignoreRootAgents = false;
@@ -494,7 +494,7 @@ export function removeWorkerWorktree(teamName, workerName, repoRoot) {
         if (existsSync(wtPath) && !isRegisteredWorktreePath(repoRoot, wtPath)) {
             validateWorktreeRemovalTarget({
                 candidatePath: wtPath,
-                expectedRoots: [join(repoRoot, '.omc', 'team', sanitizeName(teamName), 'worktrees')],
+                expectedRoots: [join(getOmcRoot(repoRoot), 'team', sanitizeName(teamName), 'worktrees')],
                 mainRepoRoots: [repoRoot],
             });
             rmSync(wtPath, { recursive: true, force: true });
